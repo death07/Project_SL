@@ -1,0 +1,14 @@
+<div
+  class="w-80 h-screen bg-red-300 absolute flex flex-col"
+  [ngClass]="{ 'w-20': isCollapse }"
+>
+  <div
+    class="flex flex-row justify-between items-center p-2"
+    (mouseover)="toggleMouseOver()"
+    (mouseleave)="toggleMouseLeave()"
+  >
+    <div>test</div>
+    <div (click)="toggleSide()" class="cursor-pointer">test</div>
+  </div>
+  <div>dsa</div>
+</div>

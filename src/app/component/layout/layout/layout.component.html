@@ -1,0 +1,13 @@
+<sidebar></sidebar>
+<div
+  class="h-screen overflow-auto relative overflow-x-hidden ml-80"
+  [ngClass]="{ 'ml-20': isCollapse }"
+>
+  <header></header>
+  <div class="overflow-auto h-[52rem] bg-gray-200 p-5">
+    <router-outlet *ngIf="true"></router-outlet>
+  </div>
+  <div class="bottom-0 w-full fixed h-[4rem] bg-gray-400">
+    <footer></footer>
+  </div>
+</div>

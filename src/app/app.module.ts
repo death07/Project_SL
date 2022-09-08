@@ -1,12 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { LayoutModule } from './component/layout/layout.module';
+import { LayoutComponent } from './component/layout/layout/layout.component';
+
+
+const routerConfig: ExtraOptions = {
+  preloadingStrategy: PreloadAllModules,
+  scrollPositionRestoration: 'enabled'
+};
 
 const appRoutes: Routes = [
   {
     path: 'main',
+    component: LayoutComponent,
     children: [
       {
         path: '',
@@ -32,7 +41,8 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes, routerConfig),
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
