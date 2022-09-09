@@ -11,9 +11,12 @@ export class SidebarComponent implements OnInit {
   @Output() readonly appearanceChanged: EventEmitter<any> = new EventEmitter<any>();
   isCollapse: boolean = false
   isClick: boolean = false;
+
+  sidebar = []
   constructor(private SharedService: SharedService) { }
 
   ngOnInit(): void {
+    this.menu()
   }
 
   toggleSide() {
@@ -42,5 +45,21 @@ export class SidebarComponent implements OnInit {
   clickCollapse(collapse: boolean, click: boolean) {
     this.isCollapse = collapse
     this.isClick = click
+  }
+
+  menu() {
+    this.sidebar = [
+      {
+        id: 'profile',
+        title: 'Profile',
+        icon: 'xlog:profile',
+        collapse: true
+      },
+      {
+        id: 'profile',
+        title: 'Transaction',
+        icon: 'xlog:profile'
+      }
+    ]
   }
 }

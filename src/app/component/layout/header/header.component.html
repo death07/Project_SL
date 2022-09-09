@@ -2,10 +2,26 @@
   class="bg-white w-full h-[4rem] flex flex-row justify-end items-center z-10 gap-4"
 >
   <div>test</div>
-  <div
-    class="flex flex-row gap-2 hover:bg-gray-300 h-full items-center justify-center px-4 cursor-pointer"
-  >
-    <div>image</div>
-    <div>image</div>
+  <div class="relative">
+    <div
+      #toggleButton
+      class="flex flex-row gap-2 p-5 hover:bg-gray-300 h-full items-center justify-center px-4 cursor-pointer"
+      (click)="toggleImage()"
+    >
+      <div (click)="toggleImage()">image</div>
+      <div (click)="toggleImage()">image</div>
+    </div>
+
+    <div
+      #menu
+      class="absolute right-0 z-10 mt-1 w-56 origin-top-right rounded-sm bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+      [ngClass]="{ 'block shadow-lg': isMenu, 'hidden shadow-sm': !isMenu }"
+      role="menu"
+      aria-orientation="vertical"
+      aria-labelledby="menu-button"
+      tabindex="-1"
+    >
+      <div>test</div>
+    </div>
   </div>
 </div>

@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ExtraOptions, PreloadAllModules, RouterModule, Routes } from '@angular/router';
@@ -5,6 +6,8 @@ import { ExtraOptions, PreloadAllModules, RouterModule, Routes } from '@angular/
 import { AppComponent } from './app.component';
 import { LayoutModule } from './component/layout/layout.module';
 import { LayoutComponent } from './component/layout/layout/layout.component';
+import { MatIconModule } from '@angular/material/icon';
+import { CoreModule } from './core/core/core.module';
 
 
 const routerConfig: ExtraOptions = {
@@ -40,9 +43,12 @@ const appRoutes: Routes = [
     AppComponent,
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     RouterModule.forRoot(appRoutes, routerConfig),
-    LayoutModule
+    LayoutModule,
+    MatIconModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

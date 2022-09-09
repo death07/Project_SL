@@ -1,14 +1,71 @@
 <div
-  class="w-80 h-screen bg-red-300 absolute flex flex-col"
+  class="w-80 h-screen absolute flex flex-col shadow-lg border"
   [ngClass]="{ 'w-20': isCollapse }"
 >
   <div
-    class="flex flex-row justify-between items-center p-2"
+    class="flex flex-row justify-between items-center p-2 h-16"
     (mouseover)="toggleMouseOver()"
     (mouseleave)="toggleMouseLeave()"
   >
-    <div>test</div>
-    <div (click)="toggleSide()" class="cursor-pointer">test</div>
+    <div class="h-20 w-full">
+      <img
+        src="https://cdn-icons-png.flaticon.com/800/7413/7413126.png"
+        class="h-[4.5rem]"
+        [ngClass]="{ 'w-[60%]': !isCollapse, ' w-full': isCollapse }"
+        alt="logo"
+      />
+    </div>
+    <div (click)="toggleSide()" class="cursor-pointer" *ngIf="!isCollapse">
+      <mat-icon [svgIcon]="'xlog:menu'"></mat-icon>
+    </div>
   </div>
-  <div>dsa</div>
+  <div
+    class="flex flex-col justify-center items-center gap-2"
+    [ngClass]="{ 'pt-0': isCollapse, 'pt-4': !isCollapse }"
+  >
+    <ng-container *ngIf="!isCollapse">
+      <div>Leonardo Dabinsi</div>
+      <div>ldabintsi@yopmail.com</div>
+    </ng-container>
+    <div
+      class="rounded-full"
+      [ngClass]="{ 'h-20 mt-0': isCollapse, 'h-32 mt-2': !isCollapse }"
+    >
+      <img
+        src="https://static.remove.bg/remove-bg-web/37843dee2531e43723b012aa78be4b91cc211fef/assets/start-1abfb4fe2980eabfbbaaa4365a0692539f7cd2725f324f904565a9a744f8e214.jpg"
+        class="contain rounded-full ring-gray-100"
+        [ngClass]="{
+          'h-16 w-16 ring-4': isCollapse,
+          'h-[7.5rem] w-[7.5rem] ring-8': !isCollapse
+        }"
+        alt="logo"
+      />
+    </div>
+  </div>
+  <div
+    class="mt-4 px-2 flex flex-col gap-2"
+    [ngClass]="{
+      'items-center justify-center text-xs': isCollapse,
+      'items-start justify-start': !isCollapse
+    }"
+  >
+    Application
+
+    <div class="flex flex-col gap-2 w-full">
+      <ng-container *ngFor="let items of sidebar">
+        <div class="flex flex-row gap-4 w-full">
+          <div class="flex-initial">{{ items.icon }}</div>
+          <div class="flex-auto">{{ items.title }}</div>
+          <div class="flex flex-end" *ngIf="items?.collapse">
+            <ng-container *ngIf="items?.isOpen">
+              <mat-icon [svgIcon]="'xlog:chev-up'"></mat-icon>
+            </ng-container>
+            <ng-container *ngIf="!items?.isOpen">
+              <mat-icon [svgIcon]="'xlog:chev-down'"></mat-icon>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
 </div>

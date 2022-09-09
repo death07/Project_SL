@@ -5,6 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { LayoutComponent } from './layout/layout.component';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -18,6 +19,7 @@ import { FooterComponent } from './footer/footer.component';
   imports: [
     CommonModule,
     RouterModule,
+    MatIconModule
   ],
   exports: [
     LayoutComponent
