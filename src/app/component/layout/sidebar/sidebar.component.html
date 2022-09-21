@@ -1,5 +1,5 @@
 <div
-  class="w-80 h-screen absolute flex flex-col shadow-lg border"
+  class="w-80 h-screen absolute flex flex-col shadow-lg border bg-xlog-primary text-white"
   [ngClass]="{ 'w-20': isCollapse }"
 >
   <div
@@ -53,18 +53,11 @@
 
     <div class="flex flex-col gap-2 w-full">
       <ng-container *ngFor="let items of sidebar">
-        <div class="flex flex-row gap-4 w-full">
-          <div class="flex-initial">{{ items.icon }}</div>
-          <div class="flex-auto">{{ items.title }}</div>
-          <div class="flex flex-end" *ngIf="items?.collapse">
-            <ng-container *ngIf="items?.isOpen">
-              <mat-icon [svgIcon]="'xlog:chev-up'"></mat-icon>
-            </ng-container>
-            <ng-container *ngIf="!items?.isOpen">
-              <mat-icon [svgIcon]="'xlog:chev-down'"></mat-icon>
-            </ng-container>
-          </div>
-        </div>
+        <xlog-collapsable
+          *ngIf="items.type === 'collapsable'"
+          [items]="items"
+        ></xlog-collapsable>
+        <xlog-item [items]="items" *ngIf="items.type === 'basic'"></xlog-item>
       </ng-container>
     </div>
   </div>

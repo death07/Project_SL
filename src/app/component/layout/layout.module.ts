@@ -6,6 +6,8 @@ import { LayoutComponent } from './layout/layout.component';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
 import { MatIconModule } from '@angular/material/icon';
+import { CollapsableComponent } from './sidebar/collapsable/collapsable.component';
+import { XlogItemComponent } from './sidebar/xlog-item/xlog-item.component';
 
 
 
@@ -14,7 +16,9 @@ import { MatIconModule } from '@angular/material/icon';
     SidebarComponent,
     HeaderComponent,
     LayoutComponent,
-    FooterComponent
+    FooterComponent,
+    CollapsableComponent,
+    XlogItemComponent
   ],
   imports: [
     CommonModule,

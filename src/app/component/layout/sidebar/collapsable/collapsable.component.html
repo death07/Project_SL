@@ -1,0 +1,26 @@
+<div
+  class="flex flex-row justify-start items-center"
+  (click)="toggleCollapsable()"
+>
+  <ng-container *ngIf="items.icon">
+    <mat-icon class="w-5 flex px-4" [svgIcon]="items.icon"></mat-icon>
+  </ng-container>
+  <div class="flex-auto">{{ items.title }}</div>
+  <mat-icon
+    class="flex-end icon-size-4"
+    [svgIcon]="'xlog:chev-down'"
+  ></mat-icon>
+</div>
+
+<div class="px-4 text-white" *ngIf="!isCollapsed" @expandCollapse>
+  <ng-container *ngFor="let item of items.children; trackBy: trackByFn">
+    <ng-container *ngIf="item.type === 'basic'">
+      <xlog-item [items]="item"></xlog-item>
+    </ng-container>
+
+    <!-- Collapsable -->
+    <ng-container *ngIf="item.type === 'collapsable'">
+      <xlog-collapsable [items]="item"></xlog-collapsable>
+    </ng-container>
+  </ng-container>
+</div>

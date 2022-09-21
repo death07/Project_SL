@@ -1,0 +1,10 @@
+<div
+  class="flex flex-row justify-start items-center"
+  [ngClass]="{ 'rounded-lg bg-xlog-secondary py-2': items.active }"
+  (click)="redirect()"
+>
+  <ng-container *ngIf="items.icon">
+    <mat-icon class="w-5 flex px-4" [svgIcon]="items.icon"></mat-icon>
+  </ng-container>
+  <div class="flex-auto">{{ items.title }}</div>
+</div>

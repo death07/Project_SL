@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SharedService } from 'src/app/service/shared/shared.service';
+import { IXlogSidebarItem } from './sidebar.type'
 
 @Component({
   selector: 'sidebar',
@@ -11,8 +12,9 @@ export class SidebarComponent implements OnInit {
   @Output() readonly appearanceChanged: EventEmitter<any> = new EventEmitter<any>();
   isCollapse: boolean = false
   isClick: boolean = false;
+  isMenuCollapse: boolean = false;
 
-  sidebar = []
+  sidebar: IXlogSidebarItem[]
   constructor(private SharedService: SharedService) { }
 
   ngOnInit(): void {
@@ -53,13 +55,42 @@ export class SidebarComponent implements OnInit {
         id: 'profile',
         title: 'Profile',
         icon: 'xlog:profile',
-        collapse: true
+        type: 'collapsable',
+        children: [
+          {
+            id: 'xlog-company',
+            title: 'Company',
+            icon: 'xlog:profile',
+            type: 'basic'
+          },
+          {
+            id: 'xlog-profile',
+            title: 'My Profile',
+            icon: 'xlog:profile',
+            type: 'basic'
+          }
+        ]
       },
       {
         id: 'profile',
         title: 'Transaction',
-        icon: 'xlog:profile'
-      }
+        icon: 'xlog:profile',
+        type: 'basic',
+
+      },
+      {
+        id: 'profile',
+        title: 'Profile',
+        icon: 'xlog:profile',
+        type: 'collapsable'
+      },
     ]
+  }
+
+
+  collapseItem(items) {
+    if (items.collapse) {
+      this.isMenuCollapse = !this.isMenuCollapse
+    }
   }
 }
