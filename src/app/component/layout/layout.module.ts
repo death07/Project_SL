@@ -8,7 +8,7 @@ import { FooterComponent } from './footer/footer.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CollapsableComponent } from './sidebar/collapsable/collapsable.component';
 import { XlogItemComponent } from './sidebar/xlog-item/xlog-item.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -23,7 +23,8 @@ import { XlogItemComponent } from './sidebar/xlog-item/xlog-item.component';
   imports: [
     CommonModule,
     RouterModule,
-    MatIconModule
+    MatIconModule,
+    BrowserAnimationsModule
   ],
   exports: [
     LayoutComponent

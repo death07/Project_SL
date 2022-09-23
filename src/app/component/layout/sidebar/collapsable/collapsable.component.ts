@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { IXlogSidebarItem } from '../sidebar.type';
 
 @Component({
   selector: 'xlog-collapsable',
-  templateUrl: './collapsable.component.html'
+  templateUrl: './collapsable.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class CollapsableComponent implements OnInit {
   @Input() items: IXlogSidebarItem;
@@ -19,6 +20,6 @@ export class CollapsableComponent implements OnInit {
   }
 
   toggleCollapsable(): void {
-    this.isCollapsed = !this.isCollapsed
+    this.items.collapseItem = !this.items.collapseItem
   }
 }

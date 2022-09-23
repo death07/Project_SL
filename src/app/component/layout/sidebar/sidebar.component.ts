@@ -1,4 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Route, Router } from '@angular/router';
+import { filter, Subject, takeUntil } from 'rxjs';
 import { SharedService } from 'src/app/service/shared/shared.service';
 import { IXlogSidebarItem } from './sidebar.type'
 
@@ -13,12 +15,24 @@ export class SidebarComponent implements OnInit {
   isCollapse: boolean = false
   isClick: boolean = false;
   isMenuCollapse: boolean = false;
+  private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   sidebar: IXlogSidebarItem[]
-  constructor(private SharedService: SharedService) { }
+  constructor(private SharedService: SharedService,
+    private _router: Router,
+    private _activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.menu()
+    this.menu();
+    this.getActiveSidebar()
+    this._router.events
+      .pipe(
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+        takeUntil(this._unsubscribeAll)
+      )
+      .subscribe((event: NavigationEnd) => {
+        this.getActiveSidebar()
+      });
   }
 
   toggleSide() {
@@ -28,6 +42,32 @@ export class SidebarComponent implements OnInit {
       this.clickCollapse(true, true)
     }
     this.SharedService.collapse(this.isCollapse)
+  }
+
+  getActiveSidebar() {
+    let url;
+    this.sidebar.forEach(item => {
+      if (item.children.length > 0) {
+        this.setActiveSidebar(item.children)
+
+        let child = item.children.some((data) => data.active === true)
+        if (child) {
+          item.collapseItem = true;
+        }
+      } else {
+        this.setActiveSidebar(this.sidebar)
+      }
+    });
+  }
+
+  setActiveSidebar(arrayData) {
+    arrayData.forEach((data) => {
+      if (data.router === this._router.url) {
+        data.active = true;
+      } else {
+        data.active = false;
+      }
+    })
   }
 
   toggleMouseOver() {
@@ -56,18 +96,21 @@ export class SidebarComponent implements OnInit {
         title: 'Profile',
         icon: 'xlog:profile',
         type: 'collapsable',
+        collapseItem: false,
         children: [
           {
             id: 'xlog-company',
             title: 'Company',
             icon: 'xlog:profile',
-            type: 'basic'
+            type: 'basic',
+            router: '/main/my-profile/profile'
           },
           {
             id: 'xlog-profile',
             title: 'My Profile',
             icon: 'xlog:profile',
-            type: 'basic'
+            type: 'basic',
+            router: '/main/my-profile/company'
           }
         ]
       },
@@ -76,13 +119,30 @@ export class SidebarComponent implements OnInit {
         title: 'Transaction',
         icon: 'xlog:profile',
         type: 'basic',
-
+        children: [],
       },
       {
-        id: 'profile',
-        title: 'Profile',
+        id: 'acm',
+        title: 'Access Management',
         icon: 'xlog:profile',
-        type: 'collapsable'
+        type: 'collapsable',
+        collapseItem: false,
+        children: [
+          {
+            id: 'xlog-company',
+            title: 'Users',
+            icon: 'xlog:profile',
+            type: 'basic',
+            router: '/main/acm/users'
+          },
+          {
+            id: 'xlog-profile',
+            title: 'Roles',
+            icon: 'xlog:profile',
+            type: 'basic',
+            router: '/main/acm/groups'
+          }
+        ]
       },
     ]
   }

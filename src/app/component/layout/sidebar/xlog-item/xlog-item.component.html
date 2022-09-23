@@ -1,7 +1,6 @@
 <div
-  class="flex flex-row justify-start items-center"
-  [ngClass]="{ 'rounded-lg bg-xlog-secondary py-2': items.active }"
-  (click)="redirect()"
+  class="flex flex-row justify-start items-center cursor-pointer"
+  [routerLink]="items.router"
 >
   <ng-container *ngIf="items.icon">
     <mat-icon class="w-5 flex px-4" [svgIcon]="items.icon"></mat-icon>

@@ -12,10 +12,15 @@
   ></mat-icon>
 </div>
 
-<div class="px-4 text-white" *ngIf="!isCollapsed" @expandCollapse>
+<div class="px-4 text-white" *ngIf="items.collapseItem">
   <ng-container *ngFor="let item of items.children; trackBy: trackByFn">
     <ng-container *ngIf="item.type === 'basic'">
-      <xlog-item [items]="item"></xlog-item>
+      <div
+        class="py-2"
+        [ngClass]="{ 'rounded-lg bg-xlog-secondary ': item.active }"
+      >
+        <xlog-item [items]="item"></xlog-item>
+      </div>
     </ng-container>
 
     <!-- Collapsable -->

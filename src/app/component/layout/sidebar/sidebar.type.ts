@@ -3,6 +3,7 @@ export interface IXlogSidebarItem {
     title: string;
     type: 'basic' | 'collapsable';
     icon?: string;
+    collapseItem?: boolean;
     badge?: {
         title?: string;
         translate?: string;
@@ -10,5 +11,6 @@ export interface IXlogSidebarItem {
         fg?: string;
     };
     active?: boolean;
+    router?: string;
     children?: IXlogSidebarItem[];
 }
