@@ -1,5 +1,4 @@
-import { Component, ContentChild, OnInit } from '@angular/core';
-import { RELOADABLE_CONTENT } from '../acm.token';
+import { Component, OnInit } from '@angular/core';
 import { Reloadable } from '../reloadable';
 
 @Component({
@@ -11,13 +10,17 @@ import { Reloadable } from '../reloadable';
 export class GroupComponent implements OnInit, Reloadable {
 
 
-  constructor() { }
+  constructor() {
+    // data
+  }
+
   loading: boolean = false;
   reload(): void {
     console.log('..loading is happening')
   }
 
   ngOnInit(): void {
+    console.log('initialize')
   }
 
 

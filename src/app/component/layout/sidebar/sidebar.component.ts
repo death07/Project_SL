@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Route, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { filter, Subject, takeUntil } from 'rxjs';
 import { SharedService } from 'src/app/service/shared/shared.service';
 import { IXlogSidebarItem } from './sidebar.type'
@@ -19,10 +19,10 @@ export class SidebarComponent implements OnInit {
 
   sidebar: IXlogSidebarItem[]
   constructor(private SharedService: SharedService,
-    private _router: Router,
-    private _activeRoute: ActivatedRoute) { }
+    private _router: Router) { }
 
   ngOnInit(): void {
+    console.log(this.isCollapse, this.isClick)
     this.menu();
     this.getActiveSidebar()
     this._router.events
@@ -35,17 +35,17 @@ export class SidebarComponent implements OnInit {
       });
   }
 
-  toggleSide() {
+  toggleSide(): void {
     if (!this.isCollapse && !this.isClick) {
       this.clickCollapse(false, true)
     } else {
       this.clickCollapse(true, true)
     }
+
     this.SharedService.collapse(this.isCollapse)
   }
 
   getActiveSidebar() {
-    let url;
     this.sidebar.forEach(item => {
       if (item.children.length > 0) {
         this.setActiveSidebar(item.children)
@@ -53,6 +53,8 @@ export class SidebarComponent implements OnInit {
         let child = item.children.some((data) => data.active === true)
         if (child) {
           item.collapseItem = true;
+        } else {
+          item.collapseItem = false;
         }
       } else {
         this.setActiveSidebar(this.sidebar)
@@ -84,7 +86,7 @@ export class SidebarComponent implements OnInit {
   }
 
 
-  clickCollapse(collapse: boolean, click: boolean) {
+  clickCollapse(collapse: boolean, click?: boolean) {
     this.isCollapse = collapse
     this.isClick = click
   }

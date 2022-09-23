@@ -9,9 +9,11 @@ import { Acm } from '../acm';
 export class UsersComponent implements OnInit {
 
   constructor() {
+    // data
   }
 
   ngOnInit(): void {
+    console.log('initialize')
   }
 
 }

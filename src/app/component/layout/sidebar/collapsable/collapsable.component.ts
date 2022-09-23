@@ -10,9 +10,12 @@ export class CollapsableComponent implements OnInit {
   @Input() items: IXlogSidebarItem;
   isCollapsed: boolean = true;
 
-  constructor() { }
+  constructor() {
+    // data
+  }
 
   ngOnInit(): void {
+    // initialize data
   }
 
   trackByFn(index: number, item: any): any {

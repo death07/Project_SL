@@ -10,11 +10,14 @@ import { Reloadable } from '../../reloadable';
 export class WidgetCardComponent extends Acm implements OnInit {
   @ContentChild(RELOADABLE_CONTENT)
   content?: Reloadable
+
+
   constructor() {
     super();
   }
 
   ngOnInit(): void {
+    console.log('initialize')
   }
 
   ngAfterContentInit(): void {
